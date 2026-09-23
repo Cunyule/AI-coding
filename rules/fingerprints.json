@@ -1,0 +1,134 @@
+[
+  {
+    "id": "ssh-openssh",
+    "priority": 100,
+    "protocol": "SSH",
+    "product": "OpenSSH",
+    "pattern": "(?i)^SSH-[0-9.]+-OpenSSH[_-](?P<version>[0-9][0-9A-Za-z.p-]*)",
+    "version_group": "version",
+    "ports": [22],
+    "base_confidence": 0.92,
+    "os_rules": [
+      {"pattern": "(?i)ubuntu", "value": "Ubuntu"},
+      {"pattern": "(?i)debian", "value": "Debian"}
+    ]
+  },
+  {
+    "id": "http-nginx",
+    "priority": 100,
+    "protocol": "HTTP",
+    "product": "nginx",
+    "pattern": "(?im)^Server:[ \\t]*nginx(?:/(?P<version>[0-9][0-9A-Za-z._-]*))?",
+    "version_group": "version",
+    "ports": [80, 443, 8080, 8443],
+    "base_confidence": 0.90,
+    "os_rules": [{"pattern": "(?i)ubuntu", "value": "Ubuntu"}]
+  },
+  {
+    "id": "http-apache",
+    "priority": 100,
+    "protocol": "HTTP",
+    "product": "Apache",
+    "pattern": "(?im)^Server:[ \\t]*Apache(?:/(?P<version>[0-9][0-9A-Za-z._-]*))?",
+    "version_group": "version",
+    "ports": [80, 443, 8080, 8443],
+    "base_confidence": 0.90,
+    "os_rules": [{"pattern": "(?i)ubuntu", "value": "Ubuntu"}]
+  },
+  {
+    "id": "http-jetty",
+    "priority": 100,
+    "protocol": "HTTP",
+    "product": "Jetty",
+    "pattern": "(?im)^Server:[ \\t]*Jetty(?:\\((?P<version_paren>[^)]+)\\)|/(?P<version>[0-9][0-9A-Za-z._-]*))?",
+    "version_group": "version",
+    "ports": [80, 443, 8080, 8443],
+    "base_confidence": 0.87
+  },
+  {
+    "id": "http-iis",
+    "priority": 100,
+    "protocol": "HTTP",
+    "product": "Microsoft-IIS",
+    "pattern": "(?im)^Server:[ \\t]*Microsoft-IIS(?:/(?P<version>[0-9][0-9A-Za-z._-]*))?",
+    "version_group": "version",
+    "ports": [80, 443, 8080],
+    "base_confidence": 0.90
+  },
+  {
+    "id": "mysql-handshake",
+    "priority": 95,
+    "protocol": "MySQL",
+    "product": "MySQL",
+    "pattern": "(?s)^.{0,8}\\x0a(?P<version>[0-9]+\\.[0-9]+(?:\\.[0-9]+)?[0-9A-Za-z._-]*)\\x00",
+    "version_group": "version",
+    "ports": [3306],
+    "base_confidence": 0.90
+  },
+  {
+    "id": "redis-response",
+    "priority": 90,
+    "protocol": "Redis",
+    "product": "Redis",
+    "pattern": "(?i)^(?:\\+PONG|-NOAUTH\\b|-ERR\\b|-WRONGTYPE\\b)",
+    "ports": [6379],
+    "base_confidence": 0.72
+  },
+  {
+    "id": "ftp-proftpd",
+    "priority": 100,
+    "protocol": "FTP",
+    "product": "ProFTPD",
+    "pattern": "(?i)^220[^\\r\\n]*ProFTPD(?:[ /](?P<version>[0-9][0-9A-Za-z._-]*))?",
+    "version_group": "version",
+    "ports": [21],
+    "base_confidence": 0.90
+  },
+  {
+    "id": "ftp-vsftpd",
+    "priority": 100,
+    "protocol": "FTP",
+    "product": "vsFTPd",
+    "pattern": "(?i)^220[^\\r\\n]*vsFTPd(?:[ /](?P<version>[0-9][0-9A-Za-z._-]*))?",
+    "version_group": "version",
+    "ports": [21],
+    "base_confidence": 0.90
+  },
+  {
+    "id": "ftp-pureftpd",
+    "priority": 100,
+    "protocol": "FTP",
+    "product": "Pure-FTPd",
+    "pattern": "(?i)^220[^\\r\\n]*Pure-FTPd(?:[ /](?P<version>[0-9][0-9A-Za-z._-]*))?",
+    "version_group": "version",
+    "ports": [21],
+    "base_confidence": 0.88
+  },
+  {
+    "id": "ssh-generic",
+    "priority": 20,
+    "protocol": "SSH",
+    "product": "",
+    "pattern": "(?i)^SSH-[0-9.]+-",
+    "ports": [22],
+    "base_confidence": 0.68
+  },
+  {
+    "id": "http-generic",
+    "priority": 20,
+    "protocol": "HTTP",
+    "product": "",
+    "pattern": "(?i)^HTTP/[0-9.]+[ \\t]+[0-9]{3}\\b",
+    "ports": [80, 443, 8080, 8443],
+    "base_confidence": 0.70
+  },
+  {
+    "id": "ftp-generic",
+    "priority": 20,
+    "protocol": "FTP",
+    "product": "",
+    "pattern": "(?i)^220(?:[ -]|$)",
+    "ports": [21],
+    "base_confidence": 0.62
+  }
+]

@@ -1,0 +1,37 @@
+services:
+  server:
+    build:
+      context: .
+      target: server
+    image: fingerprint-server:local
+    environment:
+      SERVER_ADDR: ":8080"
+      RULES_FILE: /app/rules/fingerprints.yaml
+    ports:
+      - "${FINGERPRINT_PORT:-8080}:8080"
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--spider", "http://localhost:8080/healthz"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+      start_period: 3s
+    restart: unless-stopped
+
+  client:
+    build:
+      context: .
+      target: client
+    image: fingerprint-client:local
+    profiles: ["client"]
+    depends_on:
+      server:
+        condition: service_healthy
+    volumes:
+      - ./testdata:/data:ro
+    command:
+      - --input
+      - /data/input.json
+      - --server
+      - http://server:8080
+      - --output
+      - "-"

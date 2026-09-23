@@ -1,0 +1,16 @@
+.git
+.gitignore
+.gitattributes
+.idea
+.vscode
+.DS_Store
+
+bin
+build
+dist
+coverage.out
+*.log
+*.tmp
+
+README.md
+compose.yaml
